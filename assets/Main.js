@@ -12,7 +12,7 @@ const Main = () => {
     <Router>
       <Header />
       <Routes>
-        <Route index element={<EventList />} />
+        <Route index element={<Home />} />
         <Route path="/event/:id" element={<EventShow />} />
       </Routes>
       <Footer />

@@ -14,7 +14,7 @@ const Main = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/event/:id" element={<EventShow />} />
-        <Route path="/createEvent" element={<CreateEvent />} />
+        {/* <Route path="/createEvent" element={<CreateEvent />} /> */}
       </Routes>
       <Footer />
     </Router>

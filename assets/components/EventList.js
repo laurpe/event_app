@@ -35,8 +35,10 @@ const EventList = () => {
                 <div className="card-body">
                   <h5 className="card-title">{event.name.fi}</h5>
                   <p className="text-gray-dark">
-                    {event?.short_description.fi}
+                    {event?.short_description?.fi ||
+                      event?.short_description?.sv}
                   </p>
+                  <p></p>
                   <p className="text-danger">{event.start_time}</p>
                   <Link
                     to={`event/${event.id}`}

@@ -25,7 +25,7 @@ const EventShow = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div className=" mt-5">
+    <div className=" container px-3 mt-5">
       <img
         src={
           event?.images[0]?.url ??
@@ -34,14 +34,27 @@ const EventShow = () => {
         alt={event?.images[0]?.alt_text ?? "image name"}
       />
       <h2>{event?.name.fi || event?.name?.sv}</h2>
-      {/* <p>Provider: {event?.provider.en}</p> */}
       <p>
-        Description:{" "}
+        {event?.offers[0]?.is_free
+          ? "free"
+          : event?.offers[0]?.price.en
+          ? event?.offers[0]?.price.en
+          : ""}
+      </p>
+      {/* <p>Provider: {event?.provider.en}</p> */}
+      <h3>About this event</h3>
+      <p>
         {event.description.en || event.description.fi || event.description.sv}
       </p>
-      <p>Start time: {event.start_time}</p>
-      <p>End time:{event.end_time}</p>
+      {/* date and time, location  */}
+      <div>
+        <p>Start time: {event.start_time}</p>
+        <p>End time:{event.end_time}</p>
+        <p>Location: </p>
+      </div>
       {/* <p>More info here: {event?.info_url.en}</p> */}
+      <h3>Tags</h3>
+      <h3>Share with friends</h3>
     </div>
   );
 };

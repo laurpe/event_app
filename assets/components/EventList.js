@@ -38,7 +38,7 @@ const EventList = () => {
                     {event?.short_description?.fi ||
                       event?.short_description?.sv}
                   </p>
-                  <p></p>
+                  <p>{event.offers[0].is_free ? "free" : ""}</p>
                   <p className="text-danger">{event.start_time}</p>
                   <Link
                     to={`event/${event.id}`}

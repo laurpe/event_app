@@ -37,6 +37,12 @@ const EventShow = () => {
         />
         <div>
           <h2>{event?.name.fi || event?.name?.sv}</h2>
+          {/* date and time, location  */}
+          <div>
+            <p>Start time: {event.start_time}</p>
+            <p>End time:{event.end_time}</p>
+            <p>Location: </p>
+          </div>
           <p>
             {event?.offers[0]?.is_free
               ? "free"
@@ -46,17 +52,20 @@ const EventShow = () => {
           </p>
         </div>
       </div>
+      <hr />
       {/* <p>Provider: {event?.provider.en}</p> */}
-      <h3>About this event</h3>
-      <p>
-        {event.description.en || event.description.fi || event.description.sv}
-      </p>
-      {/* date and time, location  */}
+
       <div>
-        <p>Start time: {event.start_time}</p>
-        <p>End time:{event.end_time}</p>
-        <p>Location: </p>
+        <div>
+          <h3>About this event</h3>
+          <p>
+            {event.description.en ||
+              event.description.fi ||
+              event.description.sv}
+          </p>
+        </div>
       </div>
+
       {/* <p>More info here: {event?.info_url.en}</p> */}
       <h3>Tags</h3>
       <h3>Share with friends</h3>

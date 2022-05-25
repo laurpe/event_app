@@ -26,21 +26,26 @@ const EventShow = () => {
   }
   return (
     <div className=" container px-3 mt-5">
-      <img
-        src={
-          event?.images[0]?.url ??
-          "https://images.unsplash.com/photo-1472653431158-6364773b2a56?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469"
-        }
-        alt={event?.images[0]?.alt_text ?? "image name"}
-      />
-      <h2>{event?.name.fi || event?.name?.sv}</h2>
-      <p>
-        {event?.offers[0]?.is_free
-          ? "free"
-          : event?.offers[0]?.price.en
-          ? event?.offers[0]?.price.en
-          : ""}
-      </p>
+      <div className="d-flex align-items-center justify-content-between flex-wrap">
+        <img
+          className="img-fluid"
+          src={
+            event?.images[0]?.url ??
+            "https://images.unsplash.com/photo-1472653431158-6364773b2a56?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469"
+          }
+          alt={event?.images[0]?.alt_text ?? "image name"}
+        />
+        <div>
+          <h2>{event?.name.fi || event?.name?.sv}</h2>
+          <p>
+            {event?.offers[0]?.is_free
+              ? "free"
+              : event?.offers[0]?.price.en
+              ? event?.offers[0]?.price.en
+              : ""}
+          </p>
+        </div>
+      </div>
       {/* <p>Provider: {event?.provider.en}</p> */}
       <h3>About this event</h3>
       <p>

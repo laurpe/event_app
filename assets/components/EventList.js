@@ -4,11 +4,18 @@ import { Link } from "react-router-dom";
 
 const EventList = () => {
   const [eventList, setEventList] = useState([]);
+  const [localEvents, setLocalEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(false);
     fetchEventList();
   }, []);
+
+  useEffect(() => {
+    axios.get("api/events").then((response) => {
+      console.log(response.data);
+    });
+  });
 
   const fetchEventList = () => {
     axios

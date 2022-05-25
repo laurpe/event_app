@@ -2,21 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-var stringToHTML = function (str) {
-  // make a new parser
-  var parser = new DOMParser();
-
-  // convert html into DOM
-  var doc = parser.parseFromString(str, "text/html");
-  var par = doc.querySelectorAll("p");
-  console.log(par);
-<<<<<<< HEAD
-  par.forEach((p) => document.getElementById("eventinfo").appendChild(p));
-=======
-  //   par.forEach((p) => document.getElementById("eventinfo").appendChild(p));
->>>>>>> upstream/master
-};
-
 const EventShow = () => {
   const [id, setId] = useState(useParams().id);
   const [event, setEvent] = useState([]);
@@ -72,7 +57,7 @@ const EventShow = () => {
         />
         <div>
           <h2>{event?.name.fi || event?.name?.sv}</h2>
-          <p>Organized By: {event?.provider?.fi || event?.provider.en}</p>
+          <p>Organized By: {event?.provider?.fi || event?.provider?.en}</p>
           {/* date and time, location  */}
           <div>
             <h3>Date and time</h3>
@@ -100,8 +85,8 @@ const EventShow = () => {
       <div>
         <div>
           <h3>About this event</h3>
-          <div>{stringToHTML(event.description?.fi)}</div>
-          <div id="eventinfo"></div>
+          {/* <div>{stringToHTML(event.description?.fi)}</div> */}
+          {/* <div id="eventinfo"></div> */}
           <p>
             {event.description.en ||
               event.description.fi ||

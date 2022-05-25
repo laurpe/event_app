@@ -82,8 +82,6 @@ const EventShow = () => {
         </div>
       </div>
       <hr />
-      {/* <p>Provider: {event?.provider.en}</p> */}
-
       <div>
         <div>
           <h3>About this event</h3>

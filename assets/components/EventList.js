@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 const EventList = () => {
   const [eventList, setEventList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setLoading(true);
+    setLoading(false);
     fetchEventList();
   }, []);
 
@@ -47,13 +47,13 @@ const EventList = () => {
                     {event?.short_description?.fi ||
                       event?.short_description?.sv}
                   </p>
-                  <p>
-                    {event.offers[0].is_free
+                  {/* <p>
+                    {event?.offers[0]?.is_free
                       ? "free"
-                      : event.offers[0].price
-                      ? event.offers[0].price
+                      : event?.offers[0]?.price.en
+                      ? event?.offers[0]?.price.en
                       : ""}
-                  </p>
+                  </p> */}
                   <p className="text-danger">{event.start_time}</p>
                   <Link
                     to={`event/${event.id}`}

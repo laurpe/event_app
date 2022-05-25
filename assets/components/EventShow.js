@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
+var stringToHTML = function (str) {
+  var parser = new DOMParser();
+  var doc = parser.parseFromString(str, "text/html");
+  var par = doc.querySelectorAll("p");
+  console.log(par);
+  //   par.forEach((p) => document.getElementById("eventinfo").appendChild(p));
+};
+
 const EventShow = () => {
   const [id, setId] = useState(useParams().id);
   const [event, setEvent] = useState([]);
@@ -85,6 +93,8 @@ const EventShow = () => {
       <div>
         <div>
           <h3>About this event</h3>
+          <div>{stringToHTML(event.description?.fi)}</div>
+          <div id="eventinfo"></div>
           <p>
             {event.description.en ||
               event.description.fi ||

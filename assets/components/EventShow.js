@@ -57,6 +57,7 @@ const EventShow = () => {
         />
         <div>
           <h2>{event?.name.fi || event?.name?.sv}</h2>
+          <p>Organized By: {event?.provider?.fi || event?.provider.en}</p>
           {/* date and time, location  */}
           <div>
             <h3>Date and time</h3>
@@ -94,7 +95,12 @@ const EventShow = () => {
         </div>
       </div>
 
-      {/* <p>More info here: {event?.info_url.en}</p> */}
+      <p>
+        More info here:
+        <a href="{event?.info_url?.en || event?.info_url.fi}">
+          {event?.info_url?.en || event?.info_url.fi}
+        </a>
+      </p>
       <h3>Tags</h3>
       <h3>Share with friends</h3>
     </div>

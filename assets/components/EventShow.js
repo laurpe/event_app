@@ -5,13 +5,8 @@ import axios from "axios";
 const EventShow = () => {
   const [id, setId] = useState(useParams().id);
   const [event, setEvent] = useState([]);
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const fetchSingleEvent = () =>
-    axios.get(`http://api.hel.fi/linkedevents/v1/event/${id}`);
-  const fetchLocation = () =>
-    axios.get(`http://api.hel.fi/linkedevents/v1/place/tprek:67854/`);
 
   //   useEffect(() => {
   //     axios
@@ -26,6 +21,25 @@ const EventShow = () => {
   //         console.log(error);
   //       });
   //   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://api.hel.fi/linkedevents/v1/event/${id}`)
+      .then(function (response) {
+        const data = response.data;
+        console.log(data);
+        setEvent(data);
+        const locationURL = data.location["@id"];
+        axios.get(locationURL).then(function (response) {
+          console.log(response.data);
+          setLocation(response.data);
+        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -45,15 +59,23 @@ const EventShow = () => {
           <h2>{event?.name.fi || event?.name?.sv}</h2>
           {/* date and time, location  */}
           <div>
+            <h3>Date and time</h3>
             <p>Start time: {event.start_time}</p>
             <p>End time:{event.end_time}</p>
-            <p>Location: </p>
+            <h3>Location</h3>
+            <p>{location?.street_address?.en}</p>{" "}
+            <p>
+              {" "}
+              <span>{location.postal_code}</span>
+              <span> {location?.address_locality?.en}</span>
+            </p>
+            <p>Phone: {location?.telephone?.fi}</p>
           </div>
           <p>
             {event?.offers[0]?.is_free
               ? "free"
-              : event?.offers[0]?.price.en
-              ? event?.offers[0]?.price.en
+              : event?.offers[0]?.price?.en
+              ? event?.offers[0]?.price?.en
               : ""}
           </p>
         </div>

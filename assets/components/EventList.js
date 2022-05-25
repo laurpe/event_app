@@ -50,8 +50,8 @@ const EventList = () => {
                   <p>
                     {event?.offers[0]?.is_free
                       ? "free"
-                      : event?.offers[0]?.price.en
-                      ? event?.offers[0]?.price.en
+                      : event?.offers[0]?.price?.en
+                      ? event?.offers[0]?.price?.en
                       : ""}
                   </p>
                   <p className="text-danger">{event.start_time}</p>

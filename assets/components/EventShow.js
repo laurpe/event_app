@@ -5,21 +5,27 @@ import axios from "axios";
 const EventShow = () => {
   const [id, setId] = useState(useParams().id);
   const [event, setEvent] = useState([]);
+  const [location, setLocation] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    axios
-      .get(`http://api.hel.fi/linkedevents/v1/event/${id}`)
-      .then(function (response) {
-        const data = response.data;
-        console.log(data);
-        setEvent(data);
-        setLoading(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
+  const fetchSingleEvent = () =>
+    axios.get(`http://api.hel.fi/linkedevents/v1/event/${id}`);
+  const fetchLocation = () =>
+    axios.get(`http://api.hel.fi/linkedevents/v1/place/tprek:67854/`);
+
+  //   useEffect(() => {
+  //     axios
+  //       .get(`http://api.hel.fi/linkedevents/v1/event/${id}`)
+  //       .then(function (response) {
+  //         const data = response.data;
+  //         console.log(data);
+  //         setEvent(data);
+  //         setLoading(false);
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+  //       });
+  //   }, []);
 
   if (loading) {
     return <p>Loading...</p>;

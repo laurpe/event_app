@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 var stringToHTML = function (str) {
@@ -10,7 +10,11 @@ var stringToHTML = function (str) {
   var doc = parser.parseFromString(str, "text/html");
   var par = doc.querySelectorAll("p");
   console.log(par);
+<<<<<<< HEAD
   par.forEach((p) => document.getElementById("eventinfo").appendChild(p));
+=======
+  //   par.forEach((p) => document.getElementById("eventinfo").appendChild(p));
+>>>>>>> upstream/master
 };
 
 const EventShow = () => {

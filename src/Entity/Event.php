@@ -29,7 +29,7 @@ class Event
     private $tags = [];
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $location;
+    private $venue;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
@@ -38,16 +38,13 @@ class Event
     private $price;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $startDate;
+    private $startDateTime;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $endDate;
+    private $endDateTime;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $startTime;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $endTime;
+    private $streetname;
 
     public function getId(): ?int
     {
@@ -114,14 +111,14 @@ class Event
         return $this;
     }
 
-    public function getLocation(): ?string
+    public function getVenue(): ?string
     {
-        return $this->location;
+        return $this->venue;
     }
 
-    public function setLocation(string $location): self
+    public function setVenue(string $venue): self
     {
-        $this->location = $location;
+        $this->venue = $venue;
 
         return $this;
     }
@@ -150,51 +147,40 @@ class Event
         return $this;
     }
 
-    public function getStartDate(): ?string
+    public function getStartDateTime(): ?string
     {
-        return $this->startDate;
+        return $this->startDateTime;
     }
 
-    public function setStartDate(string $startDate): self
+    public function setStartDateTime(string $startDateTime): self
     {
-        $this->startDate = $startDate;
+        $this->startDateTime = $startDateTime;
 
         return $this;
     }
 
-    public function getEndDate(): ?string
+    public function getEndDateTime(): ?string
     {
-        return $this->endDate;
+        return $this->endDateTime;
     }
 
-    public function setEndDate(string $endDate): self
+    public function setEndDateTime(string $endDateTime): self
     {
-        $this->endDate = $endDate;
+        $this->endDateTime = $endDateTime;
 
         return $this;
     }
 
-    public function getStartTime(): ?string
+    public function getStreetname(): ?string
     {
-        return $this->startTime;
+        return $this->streetname;
     }
 
-    public function setStartTime(string $startTime): self
+    public function setStreetname(string $streetname): self
     {
-        $this->startTime = $startTime;
+        $this->streetname = $streetname;
 
         return $this;
     }
 
-    public function getEndTime(): ?string
-    {
-        return $this->endTime;
-    }
-
-    public function setEndTime(string $endTime): self
-    {
-        $this->endTime = $endTime;
-
-        return $this;
-    }
 }

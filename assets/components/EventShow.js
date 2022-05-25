@@ -3,11 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 var stringToHTML = function (str) {
+  // make a new parser
   var parser = new DOMParser();
+
+  // convert html into DOM
   var doc = parser.parseFromString(str, "text/html");
   var par = doc.querySelectorAll("p");
   console.log(par);
-  //   par.forEach((p) => document.getElementById("eventinfo").appendChild(p));
+  par.forEach((p) => document.getElementById("eventinfo").appendChild(p));
 };
 
 const EventShow = () => {

@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+var parser = new DOMParser();
+// var stringToHTML = function (str) {
+//   var doc = parser.parseFromString(str, "text/html");
+//   var par = doc.querySelectorAll("p");
+//   par.forEach((p) => document.querySelector("").appendChild(p));
+// };
 
 const EventShow = () => {
   const [id, setId] = useState(useParams().id);
   const [event, setEvent] = useState([]);
   const [location, setLocation] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [description, setDescription] = useState([]);
 
   //   useEffect(() => {
   //     axios
@@ -27,11 +34,12 @@ const EventShow = () => {
       .get(`http://api.hel.fi/linkedevents/v1/event/${id}`)
       .then(function (response) {
         const data = response.data;
-        console.log(data);
+        // console.log(data);
         setEvent(data);
+
         const locationURL = data.location["@id"];
         axios.get(locationURL).then(function (response) {
-          console.log(response.data);
+          // console.log(response.data);
           setLocation(response.data);
         });
         setLoading(false);
@@ -56,33 +64,33 @@ const EventShow = () => {
           alt={event?.images[0]?.alt_text ?? "image name"}
         />
         <div>
-          <h2>{event?.name.fi || event?.name?.sv}</h2>
-          <p>Organized By: {event?.provider?.fi || event?.provider?.en}</p>
-          {/* date and time, location  */}
           <div>
-            <h3>Date and time</h3>
-            <p>Start time: {event.start_time}</p>
-            <p>End time:{event.end_time}</p>
-            <h3>Location</h3>
-            <p>{location?.street_address?.en}</p>{" "}
+            <h2>{event?.name.fi || event?.name?.sv}</h2>
+            <p>Organized By: {event?.provider?.fi || event?.provider?.en}</p>
+            {/* date and time, location  */}
+            <div>
+              <h3>Date and time</h3>
+              <p>Start time: {event.start_time}</p>
+              <p>End time:{event.end_time}</p>
+              <h3>Location</h3>
+              <p>{location?.street_address?.en}</p>{" "}
+              <p>
+                {" "}
+                <span>{location.postal_code}</span>
+                <span> {location?.address_locality?.en}</span>
+              </p>
+              <p>Phone: {location?.telephone?.fi}</p>
+            </div>
             <p>
-              {" "}
-              <span>{location.postal_code}</span>
-              <span> {location?.address_locality?.en}</span>
+              {event?.offers[0]?.is_free
+                ? "free"
+                : event?.offers[0]?.price?.en
+                ? event?.offers[0]?.price?.en
+                : ""}
             </p>
-            <p>Phone: {location?.telephone?.fi}</p>
           </div>
-          <p>
-            {event?.offers[0]?.is_free
-              ? "free"
-              : event?.offers[0]?.price?.en
-              ? event?.offers[0]?.price?.en
-              : ""}
-          </p>
         </div>
-      </div>
-      <hr />
-      <div>
+        <hr />
         <div>
           <h3>About this event</h3>
           {/* <div>{stringToHTML(event.description?.fi)}</div> */}
@@ -93,16 +101,18 @@ const EventShow = () => {
               event.description.sv}
           </p>
         </div>
-      </div>
 
-      <p>
-        More info here:
-        <a href="{event?.info_url?.en || event?.info_url.fi}">
-          {event?.info_url?.en || event?.info_url.fi}
-        </a>
-      </p>
-      <h3>Tags</h3>
-      <h3>Share with friends</h3>
+        <p>
+          More info here:
+          <a href="{event?.info_url?.en || event?.info_url.fi}">
+            {event?.info_url?.en || event?.info_url?.fi
+              ? event?.info_url.fi
+              : "event url"}
+          </a>
+        </p>
+        <h3>Tags</h3>
+        <h3>Share with friends</h3>
+      </div>
     </div>
   );
 };

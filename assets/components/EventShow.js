@@ -67,6 +67,13 @@ const EventShow = () => {
           <div>
             <h2>{event?.name.fi || event?.name?.sv}</h2>
             <p>Organized By: {event?.provider?.fi || event?.provider?.en}</p>
+            <p>
+              {event?.offers[0]?.is_free
+                ? "free"
+                : event?.offers[0]?.price?.en
+                ? event?.offers[0]?.price?.en
+                : ""}
+            </p>
             {/* date and time, location  */}
             <div>
               <h3>Date and time</h3>
@@ -81,13 +88,6 @@ const EventShow = () => {
               </p>
               <p>Phone: {location?.telephone?.fi}</p>
             </div>
-            <p>
-              {event?.offers[0]?.is_free
-                ? "free"
-                : event?.offers[0]?.price?.en
-                ? event?.offers[0]?.price?.en
-                : ""}
-            </p>
           </div>
         </div>
         <hr />

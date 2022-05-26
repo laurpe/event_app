@@ -9,14 +9,22 @@ const EventList = () => {
   useEffect(() => {
     fetchEventList();
     setLoading(false);
+    getRandom();
   }, []);
 
   useEffect(() => {
     axios.get("api/events").then((response) => {
       console.log(response.data);
     });
-  });
+  }, []);
 
+  const getRandom = () => {
+    let random = Math.floor(Math.random());
+    console.log(random);
+    return random;
+  };
+
+  //   Fetch data from helsinki api
   const fetchEventList = async () => {
     await axios
       .get("http://api.hel.fi/linkedevents/v1/event")

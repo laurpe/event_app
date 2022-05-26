@@ -66,9 +66,8 @@ const EventShow = () => {
               <p>Start time: {event.start_time}</p>
               <p>End time:{event.end_time}</p>
               <h3>Location</h3>
-              <p>{location?.street_address?.en}</p>{" "}
+              <p>{location?.street_address?.en}</p>
               <p>
-                {" "}
                 <span>{location.postal_code}</span>
                 <span> {location?.address_locality?.en}</span>
               </p>

@@ -15,20 +15,6 @@ const EventShow = () => {
   const [loading, setLoading] = useState(true);
   const [description, setDescription] = useState([]);
 
-  //   useEffect(() => {
-  //     axios
-  //       .get(`http://api.hel.fi/linkedevents/v1/event/${id}`)
-  //       .then(function (response) {
-  //         const data = response.data;
-  //         console.log(data);
-  //         setEvent(data);
-  //         setLoading(false);
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error);
-  //       });
-  //   }, []);
-
   useEffect(() => {
     axios
       .get(`http://api.hel.fi/linkedevents/v1/event/${id}`)

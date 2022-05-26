@@ -7,8 +7,8 @@ const EventList = () => {
   const [localEvents, setLocalEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setLoading(false);
     fetchEventList();
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -17,8 +17,8 @@ const EventList = () => {
     });
   });
 
-  const fetchEventList = () => {
-    axios
+  const fetchEventList = async () => {
+    await axios
       .get("http://api.hel.fi/linkedevents/v1/event")
       .then(function (response) {
         console.log(response.data.data); /* an array of object */

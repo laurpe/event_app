@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
 
 const EventList = () => {
   const [eventList, setEventList] = useState([]);
@@ -31,6 +32,15 @@ const EventList = () => {
         console.log(error);
       });
   };
+
+  const dateTimeFormat = (str) => {
+    let date = new Date(Date.parse(str)).toString();
+    console.log(typeof date);
+    console.log(str);
+    console.log(date);
+    return date;
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -63,7 +73,9 @@ const EventList = () => {
                       ? event?.offers[0]?.price?.en
                       : ""}
                   </p>
-                  <p className="text-danger">{event.start_time}</p>
+                  <p className="text-danger">
+                    {dateTimeFormat(event.start_time)}
+                  </p>
                   <Link
                     to={`event/${event.id}`}
                     className="btn btn-primary mx-1"

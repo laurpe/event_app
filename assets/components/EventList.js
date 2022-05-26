@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
-const EventList = () => {
+const EventList = (props) => {
   const [eventList, setEventList] = useState([]);
   const [localEvents, setLocalEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,14 +31,6 @@ const EventList = () => {
       .catch(function (error) {
         console.log(error);
       });
-  };
-
-  const dateTimeFormat = (str) => {
-    let date = new Date(Date.parse(str)).toString();
-    console.log(typeof date);
-    console.log(str);
-    console.log(date);
-    return date;
   };
 
   if (loading) {
@@ -74,7 +66,7 @@ const EventList = () => {
                       : ""}
                   </p>
                   <p className="text-danger">
-                    {dateTimeFormat(event.start_time)}
+                    {props.dateTimeFormat(event.start_time)}
                   </p>
                   <Link
                     to={`event/${event.id}`}

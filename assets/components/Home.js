@@ -1,7 +1,7 @@
 import React from "react";
 import EventList from "./EventList";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div>
       {/* Main jumbotron for a primary marketing message or call to action  */}
@@ -23,7 +23,7 @@ const Home = () => {
       </div>
 
       {/* Cards container  */}
-      <EventList />
+      <EventList dateTimeFormat={props.dateTimeFormat} />
     </div>
   );
 };

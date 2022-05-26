@@ -8,7 +8,7 @@ var parser = new DOMParser();
 //   par.forEach((p) => document.querySelector("").appendChild(p));
 // };
 
-const EventShow = () => {
+const EventShow = (props) => {
   const [id, setId] = useState(useParams().id);
   const [event, setEvent] = useState([]);
   const [location, setLocation] = useState([]);
@@ -63,8 +63,11 @@ const EventShow = () => {
             {/* date and time, location  */}
             <div>
               <h3>Date and time</h3>
-              <p>Start time: {event.start_time}</p>
-              <p>End time:{event.end_time}</p>
+              <p>Start time: {props.dateTimeFormat(event?.start_time)}</p>
+              <p>
+                End time:
+                {props.dateTimeFormat(event?.end_time) || "Not available"}
+              </p>
               <h3>Location</h3>
               <p>{location?.street_address?.en}</p>
               <p>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import dayjs from "dayjs";
 
 const EventList = (props) => {
   const [eventList, setEventList] = useState([]);

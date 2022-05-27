@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 var parser = new DOMParser();
 // var stringToHTML = function (str) {
 //   var doc = parser.parseFromString(str, "text/html");
@@ -60,13 +62,20 @@ const EventShow = (props) => {
           </p>
           {/* date and time, location  */}
 
-          <h3>Date and time</h3>
+          <h3>
+            {" "}
+            <CalendarMonthIcon /> Date and time
+          </h3>
           <p>Start time: {props.dateTimeFormat(event?.start_time)}</p>
           <p>
             End time:
             {props.dateTimeFormat(event?.end_time) || "Not available"}
           </p>
-          <h3>Location</h3>
+          <h3>
+            {" "}
+            <LocationOnIcon />
+            Location
+          </h3>
           <p>{location?.street_address?.en}</p>
           <p>
             <span>{location.postal_code}</span>
@@ -92,8 +101,28 @@ const EventShow = (props) => {
             : "event url"}
         </a>
       </p>
-      <h3>Tags</h3>
+      <h3>Tags: </h3>
       <h3>Share with friends</h3>
+      <div>
+        <a href="" className="me-4 text-reset">
+          <i className="fab fa-facebook-f"></i>
+        </a>
+        <a href="" className="me-4 text-reset">
+          <i className="fab fa-twitter"></i>
+        </a>
+        <a href="" className="me-4 text-reset">
+          <i className="fab fa-google"></i>
+        </a>
+        <a href="" className="me-4 text-reset">
+          <i className="fab fa-instagram"></i>
+        </a>
+        <a href="" className="me-4 text-reset">
+          <i className="fab fa-linkedin"></i>
+        </a>
+        <a href="" className="me-4 text-reset">
+          <i className="fab fa-github"></i>
+        </a>
+      </div>
     </div>
   );
 };

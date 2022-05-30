@@ -7,6 +7,7 @@ const EventList = (props) => {
   const [eventList, setEventList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+
   // handle search
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -26,6 +27,8 @@ const EventList = (props) => {
     setLoading(false);
   }, []);
 
+  // fetch events
+
   const fetchLocalEvents = async () => {
     const response = await axios.get("/api/events");
     setEventList(response.data);
@@ -38,8 +41,17 @@ const EventList = (props) => {
 
   return (
     <div className="container">
+      <input
+        className="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        value={search}
+        onChange={handleSearch}
+      />
+
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {eventList.map((event, _) => {
+        {filteredEvents().map((event, _) => {
           return (
             <div key={event.id} className="col">
               <div className="card shadow-sm">

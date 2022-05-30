@@ -3,9 +3,24 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const EventList = (props) => {
+  // States
   const [eventList, setEventList] = useState([]);
-  const [localEvents, setLocalEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  // handle search
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const filteredEvents = () => {
+    if (search === "") {
+      return eventList;
+    }
+    return eventList.filter((event) => {
+      return event.name.toLowerCase().includes(search.toLowerCase());
+    });
+  };
+
   useEffect(() => {
     fetchLocalEvents();
     fetchSingle();
@@ -45,7 +60,7 @@ const EventList = (props) => {
                 />
                 <div className="card-body">
                   <h5 className="card-title">{event.name}</h5>
-                  <p className="text-gray-dark">{event?.description}</p>
+
                   <p>{event?.price}</p>
                   <p className="text-danger">
                     {props.dateTimeFormat(event.startDateTime)}

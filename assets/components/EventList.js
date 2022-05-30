@@ -30,24 +30,24 @@ const EventList = (props) => {
       setFilteredData(APIData);
     } else {
       // filter out APIData using filter method
-      const filteredEvents = APIData.filter((event) => {
+      const result = APIData.filter((event) => {
         return Object.values(event)
           .join("")
           .toLowerCase()
           .includes(search.toLowerCase());
       });
-      setFilteredData(filteredEvents);
+      setFilteredData(result);
     }
   };
 
-  useEffect(() => {
-    const result = APIData.filter(
-      ({ name, price }) =>
-        price === "free" ||
-        name.toLowerCase().includes(search.toLowerCase().trim())
-    );
-    setFilteredData(result);
-  }, []);
+  // handle filter
+  const handlePriceFilter = (filterPrice) => {
+    const filteredPriceItems = APIData.filter((eventItem) => {
+      return eventItem.price === "free";
+    });
+    console.log(filteredPriceItems);
+    setFilteredData(filteredPriceItems);
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -65,74 +65,73 @@ const EventList = (props) => {
         onChange={(e) => handleSearch(e.target.value)}
       />
       <div>
-        <button>All</button>
-        <button>Free</button>
+        <button onClick={() => setFilteredData(APIData)}>All</button>
+        <button onClick={() => handlePriceFilter("free")}>Free</button>
       </div>
 
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {search.length > 1
-          ? filteredData.map((event) => {
-              return (
-                <div key={event.id} className="col">
-                  <div className="card shadow-sm">
-                    <img
-                      className="card-img-top"
-                      src={
-                        // event?.images[0]?.url ||
-                        event?.image ||
-                        "https://images.unsplash.com/photo-1472653431158-6364773b2a56?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469"
-                      }
-                      // alt={event?.images[0].alt_text || "image name"}
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">{event.name}</h5>
+        {filteredData.map((event) => {
+          return (
+            <div key={event.id} className="col">
+              <div className="card shadow-sm">
+                <img
+                  className="card-img-top"
+                  src={
+                    // event?.images[0]?.url ||
+                    event?.image ||
+                    "https://images.unsplash.com/photo-1472653431158-6364773b2a56?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469"
+                  }
+                  // alt={event?.images[0].alt_text || "image name"}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{event.name}</h5>
 
-                      <p>{event?.price}</p>
-                      <p className="text-danger">
-                        {props.dateTimeFormat(event.startDateTime)}
-                      </p>
-                      <Link
-                        to={`events/${event.id}`}
-                        className="btn btn-primary mx-1"
-                      >
-                        See more
-                      </Link>
-                    </div>
+                  <p>{event?.price}</p>
+                  <p className="text-danger">
+                    {props.dateTimeFormat(event.startDateTime)}
+                  </p>
+                  <Link
+                    to={`events/${event.id}`}
+                    className="btn btn-primary mx-1"
+                  >
+                    See more
+                  </Link>
+                </div>
+              </div>
+            </div>
+          );
+        }) ||
+          APIData.map((event) => {
+            return (
+              <div key={event.id} className="col">
+                <div className="card shadow-sm">
+                  <img
+                    className="card-img-top"
+                    src={
+                      // event?.images[0]?.url ||
+                      event?.image ||
+                      "https://images.unsplash.com/photo-1472653431158-6364773b2a56?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469"
+                    }
+                    // alt={event?.images[0].alt_text || "image name"}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{event.name}</h5>
+
+                    <p>{event?.price}</p>
+                    <p className="text-danger">
+                      {props.dateTimeFormat(event.startDateTime)}
+                    </p>
+                    <Link
+                      to={`events/${event.id}`}
+                      className="btn btn-primary mx-1"
+                    >
+                      See more
+                    </Link>
                   </div>
                 </div>
-              );
-            })
-          : APIData.map((event) => {
-              return (
-                <div key={event.id} className="col">
-                  <div className="card shadow-sm">
-                    <img
-                      className="card-img-top"
-                      src={
-                        // event?.images[0]?.url ||
-                        event?.image ||
-                        "https://images.unsplash.com/photo-1472653431158-6364773b2a56?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469"
-                      }
-                      // alt={event?.images[0].alt_text || "image name"}
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">{event.name}</h5>
-
-                      <p>{event?.price}</p>
-                      <p className="text-danger">
-                        {props.dateTimeFormat(event.startDateTime)}
-                      </p>
-                      <Link
-                        to={`events/${event.id}`}
-                        className="btn btn-primary mx-1"
-                      >
-                        See more
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+              </div>
+            );
+          })}
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const EventList = (props) => {
   // States
   const [eventList, setEventList] = useState([]);
-  const [filteredData, setFilteredData] = useState(eventList);
+  const [filteredData, setFilteredData] = useState([eventList]);
   const [filterParam, setFilterParam] = useState("");
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -27,6 +27,7 @@ const EventList = (props) => {
   useEffect(() => {
     // fetch events
     const fetchLocalEvents = async () => {
+      setLoading(true);
       const response = await axios.get("/api/events");
       setEventList(response.data);
       setFilteredData(response.data);
@@ -34,8 +35,11 @@ const EventList = (props) => {
     };
 
     fetchLocalEvents();
-    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    const result = eventList.filter(({ name, price }) => price);
+  });
 
   if (loading) {
     return <p>Loading...</p>;

@@ -23,20 +23,6 @@ const EventList = (props) => {
     console.log(response.data);
   };
 
-  //   Fetch data from helsinki api
-  //   const fetchEventList = async () => {
-  //     await axios
-  //       .get("http://api.hel.fi/linkedevents/v1/event")
-  //       .then(function (response) {
-  //         console.log(response.data.data); /* an array of object */
-  //         setEventList(response.data.data);
-  //         setLoading(false);
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error);
-  //       });
-  //   };
-
   if (loading) {
     return <p>Loading...</p>;
   }

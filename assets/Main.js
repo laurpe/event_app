@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
@@ -11,12 +11,28 @@ import LogIn from "./components/LogIn";
 import CreateEvent from "./components/CreateEvent";
 
 const Main = () => {
+  // States
+  const [search, setSearch] = useState("");
+
   // format date and time
   const dateTimeFormat = (str) => {
     let date = new Date(
       Date.parse(str)
     ).toString(); /* convert date object to string to insert into jsx */
     return date;
+  };
+  // handle search
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const filteredRecipes = () => {
+    if (search === "") {
+      return recipes;
+    }
+    return recipes.filter((recipe) => {
+      return recipe.name.toLowerCase().includes(search.toLowerCase());
+    });
   };
 
   return (

@@ -18,7 +18,7 @@ const EventList = (props) => {
       return eventList;
     }
     return eventList.filter((event) => {
-      return event.name.toLowerCase().includes(search.toLowerCase());
+      return event.name.toLowerCase().includes(search.toLowerCase().trim());
     });
   };
 

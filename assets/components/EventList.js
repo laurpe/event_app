@@ -23,7 +23,6 @@ const EventList = (props) => {
 
   useEffect(() => {
     fetchLocalEvents();
-    fetchSingle();
     setLoading(false);
   }, []);
 
@@ -31,11 +30,6 @@ const EventList = (props) => {
     const response = await axios.get("/api/events");
     setEventList(response.data);
     setLoading(false);
-  };
-
-  const fetchSingle = async () => {
-    const response = await axios.get("/api/events/3");
-    console.log(response.data);
   };
 
   if (loading) {

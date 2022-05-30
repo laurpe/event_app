@@ -45,7 +45,6 @@ const EventList = (props) => {
     const filteredPriceItems = APIData.filter((eventItem) => {
       return eventItem.price === "free";
     });
-    console.log(filteredPriceItems);
     setFilteredData(filteredPriceItems);
   };
 

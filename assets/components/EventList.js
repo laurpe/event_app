@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 const EventList = (props) => {
   // States
   const [eventList, setEventList] = useState([]);
+  const [filteredData, setFilteredData] = useState(eventList);
+  const [filterParam, setFilterParam] = useState("");
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
@@ -23,17 +25,17 @@ const EventList = (props) => {
   };
 
   useEffect(() => {
+    // fetch events
+    const fetchLocalEvents = async () => {
+      const response = await axios.get("/api/events");
+      setEventList(response.data);
+      setFilteredData(response.data);
+      setLoading(false);
+    };
+
     fetchLocalEvents();
     setLoading(false);
   }, []);
-
-  // fetch events
-
-  const fetchLocalEvents = async () => {
-    const response = await axios.get("/api/events");
-    setEventList(response.data);
-    setLoading(false);
-  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -41,6 +43,7 @@ const EventList = (props) => {
 
   return (
     <div className="container">
+      {/* search  */}
       <input
         className="form-control me-2"
         type="search"
@@ -49,6 +52,10 @@ const EventList = (props) => {
         value={search}
         onChange={handleSearch}
       />
+      <div>
+        <button>All</button>
+        <button>Free</button>
+      </div>
 
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {filteredEvents().map((event, _) => {

@@ -15,7 +15,6 @@ const EventShow = (props) => {
   useEffect(() => {
     const fetchSingle = async () => {
       const response = await axios.get("/api/events/3");
-      console.log(response.data);
       setEvent(response.data);
     };
     fetchSingle();

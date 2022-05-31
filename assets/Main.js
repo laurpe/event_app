@@ -10,14 +10,6 @@ import LogIn from "./components/LogIn";
 import CreateEvent from "./components/CreateEvent";
 
 const Main = () => {
-  // format date and time
-  // const dateTimeFormat = (dateString) => {
-  //   let date = new Date(
-  //     dateString
-  //   ).toString(); /* convert date object to string to insert into jsx */
-  //   return date;
-  // };
-
   return (
     <Router>
       <Header />

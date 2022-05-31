@@ -29,7 +29,7 @@ const EventList = (props) => {
   const categoryItems = [...new Set(APIData.map((event) => event.category))];
 
   // Date time format
-  const dateTimeFormat = (dateString) => {
+  const findDay = (dateString) => {
     let eventDate = new Date(dateString);
     let eventDateString = new Date(
       dateString
@@ -98,23 +98,27 @@ const EventList = (props) => {
         onChange={(e) => handleSearch(e.target.value)}
       />
 
-      <div>
+      <div className="container my-3">
         Filters
         <FilterListIcon />
-        <Button
+        <button
+          type="button"
+          className="btn btn-outline-primary mx-1 my-1"
           variant="outlined"
           size="small"
           onClick={() => setFilteredData(APIData)}
         >
           All
-        </Button>
-        <Button
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-primary mx-1 my-1"
           variant="outlined"
           size="small"
           onClick={() => handlePriceFilter("free")}
         >
           Free
-        </Button>
+        </button>
         {/* <select name="category" id="category">
           {categoryItems.map((cat) => {
             return (
@@ -130,14 +134,14 @@ const EventList = (props) => {
         </select> */}
         {categoryItems.map((cat) => {
           return (
-            <Button
+            <button
+              type="button"
+              className="btn btn-outline-primary mx-1 my-1"
               key={cat}
-              variant="outlined"
-              size="small"
               onClick={() => handleCategoryFilter(cat)}
             >
               {cat}
-            </Button>
+            </button>
           );
         })}
       </div>
@@ -159,9 +163,7 @@ const EventList = (props) => {
                   <h5 className="card-title">{event.name}</h5>
 
                   <p>{event?.price}</p>
-                  <p className="text-danger">
-                    {dateTimeFormat(event.startDateTime)}
-                  </p>
+                  <p className="text-danger">{findDay(event.startDateTime)}</p>
                   <Link
                     to={`events/${event.id}`}
                     className="btn btn-primary mx-1"

@@ -22,6 +22,13 @@ const EventShow = (props) => {
     setLoading(false);
   }, []);
 
+  // format date and time
+  const dateTimeFormat = (dateString) => {
+    let date = new Date(
+      dateString
+    ).toString(); /* convert date object to string to insert into jsx */
+    return date;
+  };
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -38,10 +45,10 @@ const EventShow = (props) => {
           <h3>
             <CalendarMonthIcon /> Date and time
           </h3>
-          <p>Start time: {props.dateTimeFormat(event?.startDateTime)}</p>
+          <p>Start time: {dateTimeFormat(event?.startDateTime)}</p>
           <p>
             End time:
-            {props.dateTimeFormat(event?.endDateTime) || "Not available"}
+            {dateTimeFormat(event?.endDateTime) || "Not available"}
           </p>
           <h3>
             <LocationOnIcon />

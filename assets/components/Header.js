@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
+  const [searchInput, setSearchInput] = useState("");
+
+  const liveSearch = (searchValue) => {
+    setSearchInput(searchValue);
+    console.log(searchValue);
+    const elements = document.childNodes.body;
+    console.log(elements);
+    for (let i = 0; i < elements.length; i++) {
+      if (
+        elements[i].innerText.toLowerCase().includes(searchValue.toLowerCase())
+      ) {
+        elements[i].classList.remove("is-hidden");
+      } else {
+        elements[i].classList.add("is-hidden");
+      }
+    }
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light border-bottom">
@@ -49,8 +66,10 @@ const Header = () => {
               <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Search"
+                placeholder="Search keyword.."
                 aria-label="Search"
+                value={searchInput}
+                onChange={(e) => liveSearch(e.target.value)}
               />
               <button className="btn btn-outline-success" type="submit">
                 Search

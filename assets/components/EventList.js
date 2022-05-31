@@ -64,11 +64,12 @@ const EventList = (props) => {
   };
 
   // handle free filter
-  const handlePriceFilter = (filterPrice) => {
-    const filteredPriceItems = APIData.filter((eventItem) => {
-      return eventItem.price === "free";
+  const handleFreeFilter = (e) => {
+    const freeButtonValue = e.target.value.toLowerCase();
+    const filteredFreeEvents = APIData.filter((eventItem) => {
+      return eventItem.price.toLowerCase() === freeButtonValue;
     });
-    setFilteredData(filteredPriceItems);
+    setFilteredData(filteredFreeEvents);
   };
 
   // handle Category filter
@@ -85,10 +86,10 @@ const EventList = (props) => {
   }
 
   // handle today filter
-  const handleTodayFilter = (buttonValue) => {
-    console.log(buttonValue);
-    const result = APIData.filter((event) => {
-      return findDay(event.startDateTime).toLowerCase() === buttonValue;
+  const handleTodayFilter = (event) => {
+    const buttonValue = event.target.value.toLowerCase();
+    const result = APIData.filter((eventItem) => {
+      return findDay(eventItem.startDateTime).toLowerCase() === buttonValue;
     });
     setFilteredData(result);
   };
@@ -118,8 +119,9 @@ const EventList = (props) => {
         </button>
         <button
           type="button"
+          value="free"
           className="btn btn-outline-primary mx-1 my-1"
-          onClick={() => handlePriceFilter("free")}
+          onClick={handleFreeFilter}
         >
           Free
         </button>
@@ -127,23 +129,10 @@ const EventList = (props) => {
           value="today"
           type="button"
           className="btn btn-outline-primary mx-1 my-1"
-          onClick={(e) => handleTodayFilter(e.target.value)}
+          onClick={handleTodayFilter}
         >
           Today
         </button>
-        {/* <select name="category" id="category">
-          {categoryItems.map((cat) => {
-            return (
-              <option
-                key={cat}
-                value={cat}
-                onClick={() => handleCategoryFilter(cat)}
-              >
-                {cat}
-              </option>
-            );
-          })}
-        </select> */}
         {categoryItems.map((cat) => {
           return (
             <button

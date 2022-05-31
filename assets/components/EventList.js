@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 
 const EventList = (props) => {
   // States
-
   const [APIData, setAPIData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,8 +28,25 @@ const EventList = (props) => {
   // create category array from APIData
   const categoryItems = [...new Set(APIData.map((event) => event.category))];
 
-  // handle search
+  // Date time format
+  const dateTimeFormat = (dateString) => {
+    let eventDate = new Date(dateString);
+    let eventDateString = new Date(
+      dateString
+    ).toString(); /* convert date object to string to insert into jsx */
+    let currentDate = new Date();
+    const timeDiff = eventDate.getTime() - currentDate.getTime();
+    const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
+    if (diffDays == 0) {
+      return "Today";
+    } else if (diffDays == 1) {
+      return "Tomorrow";
+    } else {
+      return new Date(dateString).toString();
+    }
+  };
 
+  // handle search
   const handleSearch = (searchValue) => {
     // set search state to the searchValue
     setSearch(searchValue);
@@ -134,18 +150,17 @@ const EventList = (props) => {
                 <img
                   className="card-img-top"
                   src={
-                    // event?.images[0]?.url ||
                     event?.image ||
                     "https://images.unsplash.com/photo-1472653431158-6364773b2a56?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469"
                   }
-                  // alt={event?.images[0].alt_text || "image name"}
+                  alt="image name"
                 />
                 <div className="card-body">
                   <h5 className="card-title">{event.name}</h5>
 
                   <p>{event?.price}</p>
                   <p className="text-danger">
-                    {props.dateTimeFormat(event.startDateTime)}
+                    {dateTimeFormat(event.startDateTime)}
                   </p>
                   <Link
                     to={`events/${event.id}`}
@@ -165,18 +180,17 @@ const EventList = (props) => {
                   <img
                     className="card-img-top"
                     src={
-                      // event?.images[0]?.url ||
                       event?.image ||
                       "https://images.unsplash.com/photo-1472653431158-6364773b2a56?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469"
                     }
-                    // alt={event?.images[0].alt_text || "image name"}
+                    alt="image name"
                   />
                   <div className="card-body">
                     <h5 className="card-title">{event.name}</h5>
 
                     <p>{event?.price}</p>
                     <p className="text-danger">
-                      {props.dateTimeFormat(event.startDateTime)}
+                      {dateTimeFormat(event.startDateTime)}
                     </p>
                     <Link
                       to={`events/${event.id}`}

@@ -62,8 +62,6 @@ const EventShow = (props) => {
       <hr />
       <div>
         <h3>About this event</h3>
-        {/* <div>{stringToHTML(event.description?.fi)}</div> */}
-        {/* <div id="eventinfo"></div> */}
         <p>{event.description}</p>
       </div>
       <p>

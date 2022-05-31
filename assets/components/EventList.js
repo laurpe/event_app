@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import Button from "@mui/material/Button";
 
 const EventList = (props) => {
   // States
@@ -64,8 +63,7 @@ const EventList = (props) => {
     }
   };
 
-  // handle filter
-
+  // handle free filter
   const handlePriceFilter = (filterPrice) => {
     const filteredPriceItems = APIData.filter((eventItem) => {
       return eventItem.price === "free";
@@ -86,6 +84,14 @@ const EventList = (props) => {
     return <p>Loading...</p>;
   }
 
+  // handle today filter
+  const handleTodayFilter = (buttonValue) => {
+    console.log(buttonValue);
+    const result = APIData.filter((event) => {
+      return findDay(event.startDateTime).toLowerCase() === buttonValue;
+    });
+    setFilteredData(result);
+  };
   return (
     <div className="container">
       {/* search  */}
@@ -113,11 +119,17 @@ const EventList = (props) => {
         <button
           type="button"
           className="btn btn-outline-primary mx-1 my-1"
-          variant="outlined"
-          size="small"
           onClick={() => handlePriceFilter("free")}
         >
           Free
+        </button>
+        <button
+          value="today"
+          type="button"
+          className="btn btn-outline-primary mx-1 my-1"
+          onClick={(e) => handleTodayFilter(e.target.value)}
+        >
+          Today
         </button>
         {/* <select name="category" id="category">
           {categoryItems.map((cat) => {

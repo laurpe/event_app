@@ -90,7 +90,7 @@ const Header = () => {
                   value={search}
                   onChange={handleLiveSearch}
                 />
-                {filteredData.length == 0 ? (
+                {search.length == 0 ? (
                   <button className="btn btn-outline-success" type="submit">
                     Search
                   </button>

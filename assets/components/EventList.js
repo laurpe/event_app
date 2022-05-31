@@ -22,6 +22,10 @@ const EventList = (props) => {
     fetchLocalEvents();
   }, []);
 
+  // create category array from APIData
+  const categoryItems = [...new Set(APIData.map((event) => event.category))];
+  console.log(categoryItems);
+
   // handle search
   const handleSearch = (searchValue) => {
     // set search state to the searchValue
@@ -48,6 +52,16 @@ const EventList = (props) => {
     setFilteredData(filteredPriceItems);
   };
 
+  // handle Category filter
+
+  const handleCategoryFilter = (currentCategory) => {
+    console.log(currentCategory);
+    const result = APIData.filter((event) => {
+      return event.category === currentCategory;
+    });
+    setFilteredData(result);
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -66,6 +80,19 @@ const EventList = (props) => {
       <div>
         <button onClick={() => setFilteredData(APIData)}>All</button>
         <button onClick={() => handlePriceFilter("free")}>Free</button>
+        <select name="category" id="category">
+          {categoryItems.map((cat) => {
+            return (
+              <option
+                key={cat}
+                value={cat}
+                onClick={() => handleCategoryFilter(cat)}
+              >
+                {cat}
+              </option>
+            );
+          })}
+        </select>
       </div>
 
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

@@ -14,7 +14,7 @@ const EventShow = (props) => {
 
   useEffect(() => {
     const fetchSingle = async () => {
-      const response = await axios.get("/api/events/3");
+      const response = await axios.get(`/api/events/${id}`);
       setEvent(response.data);
     };
     fetchSingle();
@@ -35,7 +35,6 @@ const EventShow = (props) => {
           {/* date and time, location  */}
 
           <h3>
-            {" "}
             <CalendarMonthIcon /> Date and time
           </h3>
           <p>Start time: {props.dateTimeFormat(event?.startDateTime)}</p>
@@ -44,10 +43,12 @@ const EventShow = (props) => {
             {props.dateTimeFormat(event?.endDateTime) || "Not available"}
           </p>
           <h3>
-            {" "}
             <LocationOnIcon />
             Location
           </h3>
+          {event?.streetname && <p>{event?.streetname}</p>}
+          {event?.postal_code && <p>{event?.postal_code}</p>}
+          <p>{event?.city}</p>
         </div>
       </div>
       <hr />

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const EventList = (props) => {
   // States
@@ -30,9 +31,6 @@ const EventList = (props) => {
   // Date time format
   const findDay = (dateString) => {
     let eventDate = new Date(dateString);
-    let eventDateString = new Date(
-      dateString
-    ).toString(); /* convert date object to string to insert into jsx */
     let currentDate = new Date();
     const timeDiff = eventDate.getTime() - currentDate.getTime();
     const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
@@ -41,7 +39,9 @@ const EventList = (props) => {
     } else if (diffDays == 1) {
       return "Tomorrow";
     } else {
-      return new Date(dateString).toString();
+      return new Date(
+        dateString
+      ).toString(); /* convert date object to string to insert into jsx */
     }
   };
 
@@ -93,18 +93,28 @@ const EventList = (props) => {
     });
     setFilteredData(result);
   };
+
+  // handle clear search input
+  const clearSearchInput = () => {
+    setFilteredData(APIData);
+    setSearch("");
+  };
   return (
     <div className="container">
       {/* search  */}
-      <input
-        className="form-control me-2"
-        type="search"
-        placeholder="Search for events"
-        aria-label="Search"
-        value={search}
-        onChange={(e) => handleSearch(e.target.value)}
-      />
-
+      <div className="d-flex justify-content-center align-items-center">
+        <input
+          className="form-control me-2"
+          type="search"
+          placeholder="Search for events"
+          aria-label="Search"
+          value={search}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+        {search.length != 0 && (
+          <ClearIcon id="clearBtn" onClick={clearSearchInput} />
+        )}
+      </div>
       <div className="container my-3">
         Filters
         <FilterListIcon />
@@ -148,6 +158,7 @@ const EventList = (props) => {
       </div>
 
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {filteredData.length == 0 && <p>No results found</p>}
         {filteredData.map((event) => {
           return (
             <div key={event.id} className="col">

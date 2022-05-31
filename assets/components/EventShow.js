@@ -33,15 +33,18 @@ const EventShow = (props) => {
     return <p>Loading...</p>;
   }
   return (
-    <div className=" container px-3 mt-5">
-      <div className="d-flex align-items-center justify-content-between flex-wrap">
-        <img src={event?.image} alt="image name" />
-        <div>
+    <div className="container px-3 mt-5">
+      <div className="d-flex align-items-center justify-content-between flex-wrap eventshow__top">
+        <div className="eventshow__img">
+          {" "}
+          <img src={event?.image} alt="image name" />
+        </div>
+
+        <div className="eventshow__content">
           <h2>{event?.name}</h2>
           <p>Organized By: {event?.organizer}</p>
           <p>{event?.price}</p>
           {/* date and time, location  */}
-
           <h3>
             <CalendarMonthIcon /> Date and time
           </h3>

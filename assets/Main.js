@@ -10,13 +10,18 @@ import LogIn from "./components/LogIn";
 import CreateEvent from "./components/CreateEvent";
 
 const Main = () => {
+
   return (
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route index element={<Home />} />
         <Route path="/events/:id" element={<EventShow />} />
+        <Route index element={<Home />} />
+        <Route
+          path="/events/:id"
+          element={<EventShow />}
+        />
         <Route path="/createEvent" element={<CreateEvent />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />

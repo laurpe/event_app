@@ -4,6 +4,7 @@ import axios from "axios";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Link } from "react-router-dom";
+
 var parser = new DOMParser();
 
 const EventShow = (props) => {
@@ -18,7 +19,6 @@ const EventShow = (props) => {
   useEffect(() => {
     const fetchSingle = async () => {
       const response = await axios.get(`/api/events/${id}`);
-      console.log(response.data);
       setEvent(response.data);
     };
     fetchSingle();
@@ -42,6 +42,14 @@ const EventShow = (props) => {
     }
 
     window.open(navUrl, "_blank");
+  };
+
+  // format date and time
+  const dateTimeFormat = (dateString) => {
+    let date = new Date(
+      dateString
+    ).toString(); /* convert date object to string to insert into jsx */
+    return date;
   };
 
   if (loading) {
@@ -73,32 +81,37 @@ const EventShow = (props) => {
               onClick={deleteEvent}
             />
           </div>
+    <div className="container px-3 mt-5">
+      <div className="d-flex align-items-center justify-content-between flex-wrap eventshow__top">
+        <div className="eventshow__img">
+          {" "}
+          <img src={event?.image} alt="image name" />
+        </div>
+        <div className="eventshow__content">
           <h2>{event?.name}</h2>
           <p>Organized By: {event?.organizer}</p>
           <p>{event?.price}</p>
           {/* date and time, location  */}
-
           <h3>
-            {" "}
             <CalendarMonthIcon /> Date and time
           </h3>
-          <p>Start time: {props.dateTimeFormat(event?.startDateTime)}</p>
+          <p>Start time: {dateTimeFormat(event?.startDateTime)}</p>
           <p>
             End time:
-            {props.dateTimeFormat(event?.endDateTime) || "Not available"}
+            {dateTimeFormat(event?.endDateTime) || "Not available"}
           </p>
           <h3>
-            {" "}
             <LocationOnIcon />
             Location
           </h3>
+          {event?.streetname && <p>{event?.streetname}</p>}
+          {event?.postal_code && <p>{event?.postal_code}</p>}
+          <p>{event?.city}</p>
         </div>
       </div>
       <hr />
       <div>
         <h3>About this event</h3>
-        {/* <div>{stringToHTML(event.description?.fi)}</div> */}
-        {/* <div id="eventinfo"></div> */}
         <p>{event.description}</p>
       </div>
       <p>

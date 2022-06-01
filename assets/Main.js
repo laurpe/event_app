@@ -11,6 +11,11 @@ import CreateEvent from "./components/CreateEvent";
 import Edit from "./components/Edit";
 
 const Main = () => {
+  // const APIKey = "AIzaSyDH82KTOYN_zbeMnEKBy6N_UrAG8gAMydQ";
+  // const mapAPI = `https://www.google.com/maps/embed/v1/MAP_MODE?key=${APIKey}&parameters`;
+  // const geocodeAPI = `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${APIKey}`;
+  // const geocoder = new google.maps.Geocoder();
+  // console.log(geocoder);
   return (
     <Router>
       <Header />
@@ -19,6 +24,7 @@ const Main = () => {
         <Route path="/events/:id" element={<EventShow />} />
         <Route index element={<Home />} />
         <Route path="/events/:id" element={<EventShow />} />
+        <Route path="/events/:id/edit" element={<Edit />} />
         <Route path="/createEvent" element={<CreateEvent />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />

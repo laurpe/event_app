@@ -4,15 +4,13 @@ import axios from "axios";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Link } from "react-router-dom";
-
-var parser = new DOMParser();
+import Map from "./Map";
 
 const EventShow = (props) => {
   const [id, setId] = useState(useParams().id);
   const [event, setEvent] = useState({});
-  const [location, setLocation] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [description, setDescription] = useState([]);
+
   const link =
     "https://www.bc.fi/koulutukset/koodaajakoulutus-tieto-ja-viestintatekniikan-perustutkinnon-osat/";
 
@@ -51,6 +49,7 @@ const EventShow = (props) => {
     ).toString(); /* convert date object to string to insert into jsx */
     return date;
   };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -104,7 +103,7 @@ const EventShow = (props) => {
               Location
             </h3>
             {event?.streetname && <p>{event?.streetname}</p>}
-            {event?.postal_code && <p>{event?.postal_code}</p>}
+            {event?.postalCode && <p>{event?.postalCode}</p>}
             <p>{event?.city}</p>
           </div>
         </div>
@@ -135,6 +134,12 @@ const EventShow = (props) => {
           </a>
         </div>
       </div>
+      <Map
+        event={event ? event : ""}
+        streetname={event?.streetname ? event?.streetname : ""}
+        postalCode={event?.postalCode ? event?.postalCode : ""}
+        city={event?.city ? event?.city : ""}
+      />
     </div>
   );
 };

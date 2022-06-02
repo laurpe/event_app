@@ -27,8 +27,8 @@ security:
 
   access_control:
     - { path: ^/api/login, roles: PUBLIC_ACCESS }
-    - { path: ^/api/events, roles: PUBLIC_ACCESS }
-    # - { path: ^/api/events, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/api/signup, roles: PUBLIC_ACCESS }
+    - { path: ^/api/events, roles: IS_AUTHENTICATED_FULLY, methods:["POST", "PUT", "DELETE"] }
     # - { path: ^/api/events, roles: IS_AUTHENTICATED_FULLY, methods: ["PUT"] }
     # - { path: ^/api/events, roles: IS_AUTHENTICATED_FULLY, methods: ["DELETE"] }
 

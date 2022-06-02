@@ -18,9 +18,13 @@ const EventList = (props) => {
       setLoading(true);
       const response = await axios.get("/api/events");
       // filter out past events
-      const validEvents = response.data.filter((event) => {
-        return Date.parse(event.startDateTime) >= Date.parse(new Date());
-      });
+      const validEvents = response.data
+        .filter(
+          (event) => Date.parse(event.startDateTime) >= Date.parse(new Date())
+        )
+        .sort(function (a, b) {
+          return new Date(a.startDateTime) - new Date(b.startDateTime);
+        });
       setAPIData(validEvents);
       setFilteredData(validEvents);
       setLoading(false);
@@ -195,6 +199,7 @@ const EventList = (props) => {
               <div className="card shadow-sm">
                 <img
                   className="card-img-top"
+                  style={{ width: "100%", height: "225px", objectFit: "cover" }}
                   src={
                     event?.image ||
                     "https://images.unsplash.com/photo-1472653431158-6364773b2a56?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469"
@@ -203,7 +208,6 @@ const EventList = (props) => {
                 />
                 <div className="card-body">
                   <h5 className="card-title">{event.name}</h5>
-
                   <p>{event?.price}</p>
                   <p className="text-danger">{findDay(event.startDateTime)}</p>
                   <Link

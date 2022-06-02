@@ -17,8 +17,12 @@ const EventList = (props) => {
     const fetchLocalEvents = async () => {
       setLoading(true);
       const response = await axios.get("/api/events");
-      setAPIData(response.data);
-      setFilteredData(response.data);
+      // check for past event dates
+      const validEvents = response.data.filter((event) => {
+        return Date.parse(event.startDateTime) >= Date.parse(new Date());
+      });
+      setAPIData(validEvents);
+      setFilteredData(validEvents);
       setLoading(false);
     };
     fetchLocalEvents();
@@ -30,13 +34,19 @@ const EventList = (props) => {
   // Date time format
 
   const dateTimeFormat = (dateString) => {
+    // get day of the week (Mon)
     let dayOfWeek = new Date(dateString).toDateString().slice(0, 4);
+
+    // get time(12:00)
     let time = new Date(dateString)
       .toLocaleTimeString()
       .slice(0, 5)
       .replaceAll(".", ":");
+
+    // get date (06.06.2022)
     let date = new Date(dateString).toLocaleDateString().replaceAll("/", ".");
-    // shorten timezone
+
+    // shorten timezone (EEST)
     let timeZone = new Date(dateString)
       .toLocaleDateString("en-FI", {
         day: "2-digit",
@@ -44,6 +54,7 @@ const EventList = (props) => {
       })
       .slice(4);
 
+    //combine all together
     let fulldate =
       dayOfWeek + "" + time + " " + date + " " + "(" + timeZone + ")";
     return fulldate;
@@ -220,11 +231,11 @@ const EventList = (props) => {
                   />
                   <div className="card-body">
                     <h5 className="card-title">{event.name}</h5>
-
                     <p>{event?.price}</p>
                     <p className="text-danger">
                       {dateTimeFormat(event.startDateTime)}
                     </p>
+                    <p>{event?.venue}</p>
                     <Link
                       to={`events/${event.id}`}
                       className="btn btn-primary mx-1"

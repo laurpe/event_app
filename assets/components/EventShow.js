@@ -102,6 +102,7 @@ const EventShow = (props) => {
               <LocationOnIcon />
               Location
             </h3>
+            {event?.venue && <p>{event?.venue}</p>}
             {event?.streetname && <p>{event?.streetname}</p>}
             {event?.postalCode && <p>{event?.postalCode}</p>}
             <p>{event?.city}</p>

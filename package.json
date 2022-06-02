@@ -21,7 +21,6 @@
     "@babel/preset-react": "^7.17.12",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@googlemaps/react-wrapper": "^1.1.34",
     "@mui/icons-material": "^5.8.0",
     "add": "^2.0.6",
     "axios": "^0.27.2",

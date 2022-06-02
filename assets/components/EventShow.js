@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Map from "./Map";
 
 const EventShow = (props) => {
@@ -11,6 +13,11 @@ const EventShow = (props) => {
   const [event, setEvent] = useState({});
   const [loading, setLoading] = useState(true);
 
+  const navigate = useNavigate();
+  console.log(navigate);
+  const handleGoBack = () => {
+    navigate("/");
+  };
   const link =
     "https://www.bc.fi/koulutukset/koodaajakoulutus-tieto-ja-viestintatekniikan-perustutkinnon-osat/";
 
@@ -68,6 +75,10 @@ const EventShow = (props) => {
   }
   return (
     <div className=" container px-3 mt-5">
+      <Button variant="contained" onClick={handleGoBack}>
+        <ArrowBackIosNewIcon />
+        Go back
+      </Button>
       <div className="d-flex align-items-center justify-content-between flex-wrap">
         <div
           style={{
@@ -119,7 +130,6 @@ const EventShow = (props) => {
             {event?.streetname && <p>{event?.streetname}</p>}
             {event?.postalCode && <p>{event?.postalCode}</p>}
             <p>{event?.city}</p>
-            <a href="#map">View map</a>
           </div>
         </div>
         <hr />

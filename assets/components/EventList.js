@@ -196,7 +196,7 @@ const EventList = (props) => {
         {filteredData.map((event) => {
           return (
             <div key={event.id} className="col">
-              <div className="card shadow-sm">
+              <div className="card shadow-sm h-100">
                 <img
                   className="card-img-top"
                   style={{ width: "100%", height: "225px", objectFit: "cover" }}

@@ -44,10 +44,23 @@ const EventShow = (props) => {
 
   // format date and time
   const dateTimeFormat = (dateString) => {
-    let date = new Date(
-      dateString
-    ).toString(); /* convert date object to string to insert into jsx */
-    return date;
+    let dayOfWeek = new Date(dateString).toDateString().slice(0, 4);
+    let time = new Date(dateString)
+      .toLocaleTimeString()
+      .slice(0, 5)
+      .replaceAll(".", ":");
+    let date = new Date(dateString).toLocaleDateString().replaceAll("/", ".");
+    // shorten timezone
+    let timeZone = new Date(dateString)
+      .toLocaleDateString("en-FI", {
+        day: "2-digit",
+        timeZoneName: "short",
+      })
+      .slice(4);
+
+    let fulldate =
+      time + " " + dayOfWeek + "" + date + " " + "(" + timeZone + ")";
+    return fulldate;
   };
 
   if (loading) {

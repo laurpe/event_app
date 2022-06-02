@@ -22,7 +22,6 @@ const Map = (props) => {
       setLatitude(numberLat);
       setLongitude(numberLong);
     };
-
     getCoords();
   });
 

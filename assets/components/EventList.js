@@ -28,6 +28,28 @@ const EventList = (props) => {
   const categoryItems = [...new Set(APIData.map((event) => event.category))];
 
   // Date time format
+
+  const dateTimeFormat = (dateString) => {
+    let dayOfWeek = new Date(dateString).toDateString().slice(0, 4);
+    let time = new Date(dateString)
+      .toLocaleTimeString()
+      .slice(0, 5)
+      .replaceAll(".", ":");
+    let date = new Date(dateString).toLocaleDateString().replaceAll("/", ".");
+    // shorten timezone
+    let timeZone = new Date(dateString)
+      .toLocaleDateString("en-FI", {
+        day: "2-digit",
+        timeZoneName: "short",
+      })
+      .slice(4);
+
+    let fulldate =
+      dayOfWeek + "" + time + " " + date + " " + "(" + timeZone + ")";
+    return fulldate;
+  };
+
+  // show today/tomorrow/date
   const findDay = (dateString) => {
     let eventDate = new Date(dateString);
     let currentDate = new Date();
@@ -38,9 +60,7 @@ const EventList = (props) => {
     } else if (diffDays == 1) {
       return "Tomorrow";
     } else {
-      return new Date(
-        dateString
-      ).toString(); /* convert date object to string to insert into jsx */
+      return dateTimeFormat(dateString);
     }
   };
 

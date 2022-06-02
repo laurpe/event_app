@@ -9,6 +9,7 @@ import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
 import CreateEvent from "./components/CreateEvent";
 import Edit from "./components/Edit";
+import ScrollToTop from "./components/ScrollToTop";
 
 const Main = () => {
   // const APIKey = "AIzaSyDH82KTOYN_zbeMnEKBy6N_UrAG8gAMydQ";
@@ -29,6 +30,7 @@ const Main = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
       </Routes>
+
       <Footer />
     </Router>
   );

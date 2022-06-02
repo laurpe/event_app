@@ -14,7 +14,6 @@ const EventShow = (props) => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  console.log(navigate);
   const handleGoBack = () => {
     navigate("/");
   };

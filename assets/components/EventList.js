@@ -155,8 +155,6 @@ const EventList = (props) => {
         <button
           type="button"
           className="btn btn-outline-primary mx-1 my-1"
-          variant="outlined"
-          size="small"
           onClick={() => setFilteredData(APIData)}
         >
           All

@@ -8,17 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
+    #[Route('/api/login', name: 'app_login', methods: ['POST'])]
     public function index(): Response
     {
-        return $this->render('login/index.html.twig', [
-            'controller_name' => 'LoginController',
-        ]);
-    }
-
-    #[Route('/logout', name: 'app_logout')]
-    public function logout(): Response
-    {
-        throw new \Exception('logout() should never be reached');
+        return $this->json('login successful');
     }
 }

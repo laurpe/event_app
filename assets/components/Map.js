@@ -17,8 +17,8 @@ const Map = (props) => {
   useEffect(() => {
     const getCoords = async () => {
       const res = await axios.get(url);
-      const numberLat = Number(res.data[0].lat);
-      const numberLong = Number(res.data[0].lon);
+      const numberLat = Number(res?.data[0]?.lat);
+      const numberLong = Number(res?.data[0]?.lon);
       setLatitude(numberLat);
       setLongitude(numberLong);
     };

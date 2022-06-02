@@ -17,7 +17,7 @@ const EventList = (props) => {
     const fetchLocalEvents = async () => {
       setLoading(true);
       const response = await axios.get("/api/events");
-      // check for past event dates
+      // filter out past events
       const validEvents = response.data.filter((event) => {
         return Date.parse(event.startDateTime) >= Date.parse(new Date());
       });

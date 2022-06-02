@@ -16,15 +16,11 @@ const Map = (props) => {
 
   useEffect(() => {
     const getCoords = async () => {
-      try {
-        const res = await axios.get(url);
-        const numberLat = Number(res.data[0].lat);
-        const numberLong = Number(res.data[0].lon);
-        setLatitude(numberLat);
-        setLongitude(numberLong);
-      } catch (error) {
-        console.log(error);
-      }
+      const res = await axios.get(url);
+      const numberLat = Number(res.data[0].lat);
+      const numberLong = Number(res.data[0].lon);
+      setLatitude(numberLat);
+      setLongitude(numberLong);
     };
 
     getCoords();
@@ -40,7 +36,8 @@ const Map = (props) => {
       />
       <Marker position={position}>
         <Popup>
-          Event location: {props?.venue}
+          {props?.event?.name}
+          <br /> {props?.venue}
           {props?.streetname && props?.streetname} {props.postalCode}{" "}
           {props.city}
         </Popup>

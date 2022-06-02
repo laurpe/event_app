@@ -106,6 +106,7 @@ const EventShow = (props) => {
             {event?.streetname && <p>{event?.streetname}</p>}
             {event?.postalCode && <p>{event?.postalCode}</p>}
             <p>{event?.city}</p>
+            <a href="#map">View map</a>
           </div>
         </div>
         <hr />
@@ -136,6 +137,7 @@ const EventShow = (props) => {
         </div>
       </div>
       <Map
+        id="map"
         event={event ? event : ""}
         streetname={event?.streetname ? event?.streetname : ""}
         postalCode={event?.postalCode ? event?.postalCode : ""}

@@ -17,10 +17,11 @@ const EventList = (props) => {
     const fetchLocalEvents = async () => {
       setLoading(true);
       const response = await axios.get("/api/events");
+      console.log(response.data);
       // filter out past events
       const validEvents = response.data
         .filter(
-          (event) => Date.parse(event.startDateTime) >= Date.parse(new Date())
+          (event) => Date.parse(event.endDateTime) >= Date.parse(new Date())
         )
         .sort(function (a, b) {
           return new Date(a.startDateTime) - new Date(b.startDateTime);
@@ -69,9 +70,9 @@ const EventList = (props) => {
     let eventDate = new Date(dateString);
     let currentDate = new Date();
     const timeDiff = eventDate.getTime() - currentDate.getTime();
-    const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
+    const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     if (diffDays == 0) {
-      return "Today";
+      return `Today at ${dateTimeFormat(dateString).substring(3)}`;
     } else if (diffDays == 1) {
       return "Tomorrow";
     } else {

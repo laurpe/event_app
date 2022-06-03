@@ -1,4 +1,5 @@
 lexik_jwt_authentication:
+<<<<<<< HEAD
   secret_key: "%env(resolve:JWT_SECRET_KEY)%"
   public_key: "%env(resolve:JWT_PUBLIC_KEY)%"
   pass_phrase: "%env(JWT_PASSPHRASE)%"
@@ -8,3 +9,14 @@ lexik_jwt_authentication:
       enabled: true
       prefix: Bearer
       name: Authorization
+=======
+    secret_key: "%env(resolve:JWT_SECRET_KEY)%"
+    public_key: "%env(resolve:JWT_PUBLIC_KEY)%"
+    pass_phrase: "%env(JWT_PASSPHRASE)%"
+    user_identity_field: email
+    token_extractors:
+        authorization_header:
+            enabled: true
+            prefix: Bearer
+            name: Authorization
+>>>>>>> 2b783f8555182889a5d75b546972e29b64acf339

@@ -115,10 +115,6 @@ const EventList = (props) => {
     setFilteredData(result);
   };
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   // handle today filter
   const handleTodayFilter = (event) => {
     const buttonValue = event.target.value.toLowerCase();
@@ -133,6 +129,9 @@ const EventList = (props) => {
     setFilteredData(APIData);
     setSearch("");
   };
+  if (loading) {
+    return <p>Loading...</p>;
+  }
   return (
     <div className="container">
       {/* search  */}

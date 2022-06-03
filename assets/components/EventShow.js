@@ -11,10 +11,6 @@ const EventShow = (props) => {
   const [event, setEvent] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const navigate = useNavigate();
-  const handleGoBack = () => {
-    navigate("/");
-  };
   const link =
     "https://www.bc.fi/koulutukset/koodaajakoulutus-tieto-ja-viestintatekniikan-perustutkinnon-osat/";
 

@@ -205,9 +205,12 @@ const EventList = (props) => {
                   alt="image name"
                 />
                 <div className="card-body">
-                  <h5 className="card-title">{event.name}</h5>
+                  <h5 className="card-title">{event?.name}</h5>
                   <p>{event?.price}</p>
-                  <p className="text-danger">{findDay(event.startDateTime)}</p>
+                  <p className="text-danger">{findDay(event?.startDateTime)}</p>
+                  <p>
+                    {event?.venue} . {event?.city}
+                  </p>
                   <Link
                     to={`events/${event.id}`}
                     className="btn btn-primary mx-1"

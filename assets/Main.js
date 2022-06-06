@@ -38,7 +38,6 @@ const Main = () => {
                     />
                 </Routes>
             </Layout>
-            <Footer />
         </Router>
     );
 };

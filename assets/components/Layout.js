@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const Layout = ({ children, loggedInUser, setLoggedInUser }) => {
     return (
@@ -9,6 +10,7 @@ const Layout = ({ children, loggedInUser, setLoggedInUser }) => {
                 setLoggedInUser={setLoggedInUser}
             />
             {children}
+            <Footer />
         </>
     );
 };

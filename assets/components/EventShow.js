@@ -24,8 +24,6 @@ const EventShow = (props) => {
     }, []);
 
     const deleteEvent = async () => {
-        e.preventDefault();
-
         const token = JSON.parse(
             window.localStorage.getItem("loggedInUserToken")
         ).token;
@@ -99,12 +97,13 @@ const EventShow = (props) => {
                     >
                         Edit event
                     </Link>
-                    <input
+                    <button
                         className="btn btn-primary mx-1"
-                        type="button"
-                        value="Delete event"
                         onClick={deleteEvent}
-                    />
+                        type="button"
+                    >
+                        Delete event
+                    </button>
                 </div>
             </div>
             <div className="container px-3 mt-5">

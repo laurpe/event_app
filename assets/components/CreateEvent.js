@@ -35,15 +35,25 @@ const CreateEvent = () => {
   const submitData = async (e) => {
     e.preventDefault();
 
-    await axios.post("/api/events", data).catch((err) => console.log(err));
-    document.querySelector("form").reset();
-    const submitMessage = document.createElement("p");
+    const token = JSON.parse(
+      window.localStorage.getItem("loggedInUserToken")
+    ).token;
 
-    submitMessage.innerHTML = "New event added!";
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+    console.log(config);
 
-    document.querySelector(".submitMessage").appendChild(submitMessage);
+    try {
+      const response = await axios.post("/api/events", data, config);
 
-    console.log(data);
+      document.querySelector("form").reset();
+      const submitMessage = document.createElement("p");
+
+      submitMessage.innerHTML = "New event added!";
+
+      document.querySelector(".submitMessage").appendChild(submitMessage);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

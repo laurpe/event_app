@@ -17,7 +17,7 @@ const EventList = (props) => {
     const fetchLocalEvents = async () => {
       setLoading(true);
       const response = await axios.get("/api/events");
-      console.log(response.data);
+
       // filter out past events
       const validEvents = response?.data
 
@@ -75,11 +75,11 @@ const EventList = (props) => {
     let eventDate = new Date(dateString);
     let currentDate = new Date();
     const timeDiff = eventDate.getTime() - currentDate.getTime();
-
-    const diffDays = Math.round(timeDiff / (1000 * 60 * 60 * 24));
-    console.log(diffDays);
+    const diffDays = Math.round(timeDiff / (1000 * 3600 * 24));
     if (diffDays < 1) {
-      return `Today at ${dateTimeFormat(dateString).substring(3)}`;
+      return `Today at ${dateTimeFormat(dateString)
+        .substring(3)
+        .substring(0, 7)}`;
     } else if (diffDays >= 1 && diffDays < 2) {
       return "Tomorrow";
     } else {
@@ -118,7 +118,7 @@ const EventList = (props) => {
 
   const handleCategoryFilter = (currentCategory) => {
     const result = APIData.filter((event) => {
-      return event.category === currentCategory.toLowerCase();
+      return event.category.toLowerCase() === currentCategory.toLowerCase();
     });
     setFilteredData(result);
   };
@@ -127,7 +127,6 @@ const EventList = (props) => {
   const handleTodayFilter = (event) => {
     const buttonValue = event.target.value.toLowerCase();
     const result = APIData.filter((eventItem) => {
-      console.log(findDay(eventItem.startDateTime));
       return findDay(eventItem.startDateTime)
         .toLowerCase()
         .includes(buttonValue);
@@ -207,7 +206,11 @@ const EventList = (props) => {
               <div className="card shadow-sm h-100">
                 <img
                   className="card-img-top"
-                  style={{ width: "100%", height: "225px", objectFit: "cover" }}
+                  style={{
+                    width: "100%",
+                    height: "225px",
+                    objectFit: "cover",
+                  }}
                   src={
                     event?.image ||
                     "https://images.unsplash.com/photo-1472653431158-6364773b2a56?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469"

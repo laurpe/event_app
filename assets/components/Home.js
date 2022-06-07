@@ -9,10 +9,8 @@ const Home = (props) => {
         <div className="container">
           <h1 className="display-3 text-light">Now is your time!</h1>
           <p className="text-light">
-            This is a template for a simple marketing or informational website.
-            It includes a large callout called a jumbotron and three supporting
-            pieces of content. Use it as a starting point to create something
-            more unique.
+            This is a website where you can browse interesting events near you
+            and also share your own.
           </p>
         </div>
       </div>

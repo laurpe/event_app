@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import "../styles/CreateEvent.module.css";
 let tags = [];
 
@@ -20,6 +22,7 @@ const CreateEvent = () => {
     tags: [],
   });
 
+  let navigate = useNavigate();
   // ****** ADDING TAGS ******
 
   const addTag = async (e) => {
@@ -125,6 +128,7 @@ const CreateEvent = () => {
       submitMessage.innerHTML = "New event added!";
 
       document.querySelector(".submitMessage").appendChild(submitMessage);
+      navigate("/my_events");
     } catch (error) {
       console.error(error);
     }
@@ -150,6 +154,7 @@ const CreateEvent = () => {
                 id="name"
                 onChange={changeData}
                 placeholder="Event name"
+                required
               />
             </div>
             <div className="form-group my-1">
@@ -160,6 +165,7 @@ const CreateEvent = () => {
                 id="organizer"
                 onChange={changeData}
                 placeholder="Organizer"
+                required
               />
             </div>
             <div>
@@ -170,6 +176,7 @@ const CreateEvent = () => {
                 id="description"
                 onChange={changeData}
                 placeholder="Description"
+                required
               />
             </div>
             <div className="my-1 wrapper form-control">
@@ -182,6 +189,7 @@ const CreateEvent = () => {
                     onKeyDown={addTag}
                     onKeyUp={checkComma}
                     placeholder="Enter comma after each tag"
+                    required
                   />
                 </ul>
               </div>
@@ -209,6 +217,7 @@ const CreateEvent = () => {
                   id="category"
                   onChange={changeCategory}
                   defaultValue=""
+                  required
                 >
                   <option disabled value="">
                     Select a category
@@ -230,6 +239,7 @@ const CreateEvent = () => {
                 id="venue"
                 placeholder="Venue name: e.g. Löyly"
                 onChange={changeData}
+                required
               />
               <input
                 className="form-control my-1"
@@ -238,6 +248,7 @@ const CreateEvent = () => {
                 id="streetname"
                 placeholder="Street: e.g. Annankatu 1"
                 onChange={changeData}
+                required
               />
               <input
                 className="form-control my-1"
@@ -246,6 +257,7 @@ const CreateEvent = () => {
                 id="postalcode"
                 placeholder="Postal Code: e.g 00100"
                 onChange={changeData}
+                required
               />
             </div>
 
@@ -260,6 +272,7 @@ const CreateEvent = () => {
                 id="startDateTime"
                 onChange={changeData}
                 min={now}
+                required
               />
             </div>
             <div className="form-group my-3">
@@ -273,6 +286,7 @@ const CreateEvent = () => {
                 id="endDateTime"
                 onChange={changeData}
                 min={now}
+                required
               />
             </div>
             <div>
@@ -283,6 +297,7 @@ const CreateEvent = () => {
                 id="price"
                 onChange={changeData}
                 placeholder="Price: free / 1e etc..."
+                required
               />
             </div>
             <div>

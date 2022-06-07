@@ -27,32 +27,8 @@ const MyEvents = () => {
   }, []);
 
   const userEvents = APIData.filter((event) => {
-    console.log(
-      "event userId",
-      event.userId,
-      "loggin userId",
-      loggedInUser.userId
-    );
     return event?.userId == loggedInUser?.userId;
   });
-
-  // fetch events
-
-  //   useEffect(() => {
-  //     const fetchLocalEvents = async () => {
-  //       setLoading(true);
-  //       const response = await axios.get("/api/events");
-  //       const userEvents = response?.data.filter((event) => {
-  //         event?.userId == loggedInUser?.userId;
-  //       });
-
-  //       console.log(userEvents);
-  //       setAPIData(userEvents);
-  //       setFilteredData(userEvents);
-  //       setLoading(false);
-  //     };
-  //     fetchLocalEvents();
-  //   }, []);
 
   // Date time format
 
@@ -116,7 +92,7 @@ const MyEvents = () => {
         {userEvents.map((event) => {
           return (
             <div key={event.id} className="col">
-              <div className="card shadow-sm">
+              <div className="card shadow-sm h-100">
                 <img
                   className="card-img-top"
                   src={

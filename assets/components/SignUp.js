@@ -21,7 +21,13 @@ const SignUp = () => {
 
     const submitData = async (e) => {
         e.preventDefault();
-        if (password === passwordConfirm) {
+        if (data.password !== data.passwordConfirm) {
+            const submitMessage = document.createElement("p");
+
+            submitMessage.innerHTML = "Passwords need to match";
+
+            document.querySelector(".submitMessage").appendChild(submitMessage);
+        } else {
             try {
                 delete data["passwordConfirm"];
                 await axios.post("/api/signup", data);
@@ -29,12 +35,6 @@ const SignUp = () => {
             } catch (error) {
                 console.error(error.message);
             }
-        } else {
-            const submitMessage = document.createElement("p");
-
-            submitMessage.innerHTML = "Passwords need to match";
-
-            document.querySelector(".submitMessage").appendChild(submitMessage);
         }
     };
 
@@ -132,7 +132,7 @@ const SignUp = () => {
                     </label>
                 </div>
 
-                <button type="submit" className=" form-control btn-dark">
+                <button type="submit" className=" form-control btn-primary">
                     Sign Up
                 </button>
             </form>

@@ -112,9 +112,7 @@ const CreateEvent = () => {
     // empties the tags array and the DOM from tags
     emptyTags();
 
-    const token = JSON.parse(
-      window.localStorage.getItem("loggedInUserToken")
-    ).token;
+    const token = JSON.parse(window.localStorage.getItem("loggedInUser")).token;
 
     const config = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -131,12 +129,9 @@ const CreateEvent = () => {
       console.error(error);
     }
     document.querySelector(".createForm").reset();
-
-    const submitMessage = document.createElement("p");
-    submitMessage.innerHTML = "New event added!";
-
-    document.querySelector(".submitMessage").appendChild(submitMessage);
   };
+
+  const now = new Date().toISOString().substring(0, 16);
 
   return (
     <>
@@ -197,7 +192,10 @@ const CreateEvent = () => {
                 <button
                   className="button form-control row my-1 mx-0"
                   onClick={(e) => emptyTags(e)}
-                  style={{ width: "80%", alignSelf: "flex-end" }}
+                  style={{
+                    width: "80%",
+                    alignSelf: "flex-end",
+                  }}
                 >
                   Remove all tags
                 </button>
@@ -210,7 +208,6 @@ const CreateEvent = () => {
                   name="category"
                   id="category"
                   onChange={changeCategory}
-                  required
                   defaultValue=""
                 >
                   <option disabled value="">
@@ -262,6 +259,7 @@ const CreateEvent = () => {
                 name="startDateTime"
                 id="startDateTime"
                 onChange={changeData}
+                min={now}
               />
             </div>
             <div className="form-group my-3">
@@ -274,6 +272,7 @@ const CreateEvent = () => {
                 name="endDateTime"
                 id="endDateTime"
                 onChange={changeData}
+                min={now}
               />
             </div>
             <div>
@@ -283,7 +282,7 @@ const CreateEvent = () => {
                 name="price"
                 id="price"
                 onChange={changeData}
-                placeholder="Price"
+                placeholder="Price: free / 1e etc..."
               />
             </div>
             <div>

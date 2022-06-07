@@ -14,11 +14,6 @@ const Home = (props) => {
             pieces of content. Use it as a starting point to create something
             more unique.
           </p>
-          <p>
-            <a className="btn btn-primary btn-lg" href="/" role="button">
-              Find your next event &raquo;
-            </a>
-          </p>
         </div>
       </div>
 

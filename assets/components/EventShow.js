@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { Link } from "react-router-dom";
 import Map from "./Map";
 
-const EventShow = (props) => {
+const EventShow = ({ loggedInUser }) => {
+  console.log(loggedInUser);
   const [id, setId] = useState(useParams().id);
   const [event, setEvent] = useState({});
   const [loading, setLoading] = useState(true);
+  let navigate = useNavigate();
+  let isCreator = false;
+
+  console.log("logginUser", loggedInUser?.userId, "event", event?.userId);
+  console.log(event);
+  if (loggedInUser?.userId == event?.userId) {
+    isCreator = true;
+  } else {
+    isCreator = false;
+  }
 
   const link =
     "https://www.bc.fi/koulutukset/koodaajakoulutus-tieto-ja-viestintatekniikan-perustutkinnon-osat/";
@@ -24,12 +34,9 @@ const EventShow = (props) => {
   }, []);
 
   const deleteEvent = async () => {
-    const token = JSON.parse(
-      window.localStorage.getItem("loggedInUserToken")
-    ).token;
+    const token = JSON.parse(window.localStorage.getItem("loggedInUser")).token;
 
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    console.log(config);
 
     try {
       await axios.delete(`/api/events/${id}`, config);
@@ -37,7 +44,7 @@ const EventShow = (props) => {
       console.error(error);
     }
 
-    window.location.href = "/";
+    navigate("/");
   };
 
   const share = (e) => {
@@ -89,19 +96,23 @@ const EventShow = (props) => {
             justifyContent: "flex-end",
           }}
         >
-          <Link
-            to={`/events/${event.id}/edit`}
-            className="btn btn-primary mx-1"
-          >
-            Edit event
-          </Link>
-          <button
-            className="btn btn-primary mx-1"
-            onClick={deleteEvent}
-            type="button"
-          >
-            Delete event
-          </button>
+          {isCreator && (
+            <>
+              <Link
+                to={`/events/${event.id}/edit`}
+                className="btn btn-primary mx-1"
+              >
+                Edit event
+              </Link>
+              <button
+                className="btn btn-primary mx-1"
+                onClick={deleteEvent}
+                type="button"
+              >
+                Delete event
+              </button>
+            </>
+          )}
         </div>
       </div>
       <div className="container px-3 mt-5">

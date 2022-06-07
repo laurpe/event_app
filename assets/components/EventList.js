@@ -222,7 +222,7 @@ const EventList = (props) => {
                   <p>{event?.price}</p>
                   <p className="text-danger">{findDay(event?.startDateTime)}</p>
                   <p>
-                    {event?.venue} . {event?.city}
+                    {event?.venue} - {event?.city}
                   </p>
                   <Link
                     to={`events/${event.id}`}
@@ -253,7 +253,9 @@ const EventList = (props) => {
                     <p className="text-danger">
                       {dateTimeFormat(event.startDateTime)}
                     </p>
-                    <p>{event?.venue}</p>
+                    <p>
+                      {event?.venue} - {event?.city}
+                    </p>
                     <Link
                       to={`events/${event.id}`}
                       className="btn btn-primary mx-1"

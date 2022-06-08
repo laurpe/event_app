@@ -6,15 +6,11 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Map from "./Map";
 
 const EventShow = ({ loggedInUser }) => {
-  console.log(loggedInUser);
   const [id, setId] = useState(useParams().id);
   const [event, setEvent] = useState({});
   const [loading, setLoading] = useState(true);
   let navigate = useNavigate();
   let isCreator = false;
-
-  console.log("logginUser", loggedInUser?.userId, "event", event?.userId);
-  console.log(event);
   if (loggedInUser?.userId == event?.userId) {
     isCreator = true;
   } else {

@@ -29,16 +29,7 @@ SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 ## Setting up the project
 
 3. Inside the Symfony-MAMP folder, clone the project and rename it to web
-4. Inside the web folder terminal, run:
-
-```cli
-composer install
-composer require symfony/webpack-encore-bundle
-npm install
-php bin/console lexik:jwt:generate-keypair
-```
-
-5. Inside the web folder create .env file and add these lines there:
+5. Inside the web folder create .env file and add and edit these lines there:
 
 ```md
 APP_ENV=dev
@@ -47,6 +38,15 @@ DATABASE_URL=//ADD YOUR DATABASE URL HERE E.G: mysql://USERNAME:PASSWORD@db:PORT
 JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
 JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
 JWT_PASSPHRASE=//WRITE YOUR OWN PASSPHRASE HERE
+```
+
+4. Inside the web folder terminal, run:
+
+```cli
+composer install
+composer require symfony/webpack-encore-bundle
+npm install
+php bin/console lexik:jwt:generate-keypair
 ```
 
 ## Creating the database
